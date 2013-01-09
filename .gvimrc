@@ -1,11 +1,15 @@
 set guifont=Inconsolata:h14
-colorscheme slate
+colorscheme lucius
 
 " Default Window sizes and config.
 set lines=60
 set columns=200
+
+" Distraction removal
 set guioptions-=T " Hide the toolbar by default
-set guioptions-=r
+set guioptions-=r " Hide the right scrollbar.
+set laststatus=0
+set noruler
 
 set title   " show title in console title bar
 
@@ -46,6 +50,12 @@ set softtabstop=4
 " number of space to use for auto indent
 set shiftwidth=4
 
+" Indent certain filetypes with only 2 spaces. Mostly markup 
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype sass setlocal ts=2 sts=2 sw=2
+autocmd Filetype scss setlocal ts=2 sts=2 sw=2
+autocmd Filetype css setlocal ts=2 sts=2 sw=2
+
 " Copy indent from current line when starting a new line.
 set autoindent
 set smartindent
@@ -76,6 +86,7 @@ map <C-K> <C-W>k<C-W>_
 map <C-L> <C-W>l<C-W>_
 map <C-H> <C-W>h<C-W>_
 
+
 " Common Typoes. This is kind of lame, but I never really have filenames
 " with capital Q/W
 cmap W w
@@ -99,14 +110,37 @@ nmap <leader>l :set list!<CR>
 
 "  " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
+set list
 "
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 
 " LodgeIt (paste.pocoo.org) mapping
-map ,p :Lodgeit<CR>
+map ,p :CPPaste<CR>
+" map ,pr :CPRun<CR>
 
 " Change leader key to , (default is \)
 let mapleader = ","
 
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
+
+" NOTE: In Lion, this is not necessary
+" Always go to full screen by default.
+" set fuoptions=maxvert,maxhorz
+" au GUIEnter * set fullscreen
+
+:nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
+
+function! MoveFile(newspec)
+     let old = expand('%')
+     " could be improved:
+     if (old == a:newspec)
+         return 0
+     endif
+     exe 'sav' fnameescape(a:newspec)
+     call delete(old)
+endfunction
+
+command! -nargs=1 -complete=file -bar MoveFile call MoveFile('<args>')
+    
+command! Marked silent !open -a "Marked.app" "%:p"
