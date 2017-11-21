@@ -93,12 +93,11 @@ function set_prompt {
     venv_name=""
   fi
 
-  export PS1="${venv_name}[\w] ${git_prompt}${COLOR_NONE}\n${homebrew_prompt}\$ "
+    echo $git_is_dirty;
+  export GIT_PS1_SHOWDIRTYSTATE=1  # Show dirty!
+  export PS1="${venv_name}[\w] \[\e[0;32m\]$(__git_ps1 "(%s)") ${COLOR_NONE}\n${homebrew_prompt}\$ "
+  #export PS1=$'\[\e[0;36m\][\u@\h] \[\e[1;33m\]\w \[\e[0;32m\]$(__git_ps1 " (%s)")\[\e[0m\]\n \xe2\x86\xaa '
 }
 export PROMPT_COMMAND=set_prompt
 
 SHELL=`ps -ef | grep $$ | awk '{ print $8 }' | head -n1`
-
-if [ $SHELL = 'zsh' ]; then
-  . ~/.zsh_prompt
-fi
