@@ -21,6 +21,10 @@ set hidden " allow switching buffers even if there are unsaved changes
 au BufRead,BufNewFile *.md setlocal textwidth=90
 au BufRead,BufNewFile *.go setlocal textwidth=90
 
+" Interface-affecting
+nmap <leader>s :set spell!<CR>
+
+
 " Visual
 set number
 
