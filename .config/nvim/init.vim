@@ -6,6 +6,9 @@ set shiftwidth=4
 set softtabstop=-1
 set shiftround
 
+" Adjust tab size for Go code to align with defined shiftwidth
+autocmd Filetype go setlocal tabstop=4
+
 " Line Wrapping
 set linebreak
 set breakindent " keep indentation when wrapping lines
