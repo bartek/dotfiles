@@ -18,6 +18,9 @@ set foldlevel=99  " start unfolded by default
 set foldmethod=indent
 set hidden " allow switching buffers even if there are unsaved changes
 
+au BufRead,BufNewFile *.md setlocal textwidth=90
+au BufRead,BufNewFile *.go setlocal textwidth=90
+
 " Visual
 set number
 
