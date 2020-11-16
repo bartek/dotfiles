@@ -34,6 +34,8 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 Plug 'dracula/vim'
 
+Plug 'dense-analysis/ale'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -80,34 +82,39 @@ nnoremap <A-l> <C-w>l
 
 " -- fzf
 nmap ; :Buffers<CR>
+nmap <leader>f :Files<CR>
 
-let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
- 
-function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, '&signcolumn', 'no')
- 
-  let height = float2nr(10)
-  let width = float2nr(80)
-  let horizontal = float2nr((&columns - width) / 2)
-  let vertical = 1
- 
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height,
-        \ 'style': 'minimal'
-        \ }
- 
-  call nvim_open_win(buf, v:true, opts)
-endfunction
+" let g:fzf_preview_window = 'right:60%'
+let g:fzf_layout = { 'window': 'enew' }
+
+augroup fzf
+  autocmd!
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
 
 " -- vim-go
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+
+" Highlighting
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+
+" Jump to declaration/symbol
+au FileType go nmap <leader>gt :GoDeclsDir<cr>
+
+
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
 
 " goimports is basically gofmt + auto importing
 " but it may be slow on large code bases. Proceeding with caution for now
@@ -116,9 +123,17 @@ let g:go_fmt_command = "goimports"
 " Automatically get signature/type info for object under cursor
 let g:go_auto_type_info = 1
 
-" Build and run coverage within vim
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+" Toggle coverage on open buffer
+au FileType go nmap <F9> :GoCoverageToggle -short<cr>
+
+" -- vim-ale
+
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+
+" Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
 
 " -- vim-airline
 
