@@ -18,15 +18,23 @@ set foldlevel=99  " start unfolded by default
 set foldmethod=indent
 set hidden " allow switching buffers even if there are unsaved changes
 
+" Interface-affecting
 au BufRead,BufNewFile *.md setlocal textwidth=90
 au BufRead,BufNewFile *.go setlocal textwidth=90
 
-" Interface-affecting
 nmap <leader>s :set spell!<CR>
 
-
-" Visual
 set number
+
+" -- F-keys navigation bindings
+
+" Quickfix
+noremap <F7> :cprevious<cr>
+noremap <F8> :cnext<cr>
+
+" Toggle coverage on open buffer
+au FileType go nmap <F9> :GoCoverageToggle -short<cr>
+
 
 call plug#begin('~/.vim/plugged')
 
@@ -123,14 +131,18 @@ let g:go_fmt_command = "goimports"
 " Automatically get signature/type info for object under cursor
 let g:go_auto_type_info = 1
 
-" Toggle coverage on open buffer
-au FileType go nmap <F9> :GoCoverageToggle -short<cr>
-
 " -- vim-ale
 
 " Error and warning signs.
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
+
+" Use quickfix instead of the loclist
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+" Autocompletion
+let g:ale_completion_enabled = 1
 
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
