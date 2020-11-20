@@ -51,6 +51,8 @@ Plug 'bling/vim-airline'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'tmsvg/pear-tree'
+
 call plug#end()
 
 syntax enable
