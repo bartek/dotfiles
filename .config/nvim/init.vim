@@ -11,17 +11,20 @@ autocmd Filetype go setlocal tabstop=4
 
 " Line Wrapping
 set linebreak
+set cmdheight=2
 set breakindent " keep indentation when wrapping lines
 set cpoptions+=n breakindentopt=sbr " display 'showbreak' symbol within the line number column
 
+set signcolumn=yes
 set foldlevel=99  " start unfolded by default
 set foldmethod=indent
 set hidden " allow switching buffers even if there are unsaved changes
+set updatetime=300
 
-" Interface-affecting
 au BufRead,BufNewFile *.md setlocal textwidth=90
 au BufRead,BufNewFile *.go setlocal textwidth=90
 
+" Interface-affecting
 nmap <leader>s :set spell!<CR>
 
 set number
