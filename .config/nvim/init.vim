@@ -27,6 +27,9 @@ au BufRead,BufNewFile *.go setlocal textwidth=90
 " Interface-affecting
 nmap <leader>s :set spell!<CR>
 
+" Toggle folding
+nnoremap <space> za
+
 set number
 
 " -- F-keys navigation bindings
