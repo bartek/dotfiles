@@ -38,17 +38,9 @@ set number
 noremap <F7> :cprevious<cr>
 noremap <F8> :cnext<cr>
 
-" Toggle coverage on open buffer
-au FileType go nmap <F9> :GoCoverageToggle -short<cr>
-
-
 call plug#begin('~/.vim/plugged')
 
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-
 Plug 'dracula/vim'
-
-Plug 'dense-analysis/ale'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -59,32 +51,36 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tmsvg/pear-tree'
 
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+
+
 call plug#end()
 
 syntax enable
 colorscheme dracula
 
-" Buffers
+" Navigation between buffers
 nmap <leader>T :enew<CR>
 nmap <leader>l :bnext<CR>
 nmap <leader>k :bprevious<CR>
-" Close the current buffer and move to the most recently viewed one.
 nmap <leader>bq :bp <Bar> bd #<CR>
 
 " open new split panes to the bottom right
 set splitright
 set splitbelow
-
-" turn terminal to normal mode with escape
-tnoremap <Esc> <C-\><C-n>
-" start terminal in insert mode
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-" open terminal on ctrl+n
-function! OpenTerminal()
-  split term://bash
-  resize 10
-endfunction
-nnoremap <c-n> :call OpenTerminal()<CR>
 
 " use alt+hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
@@ -99,63 +95,75 @@ nnoremap <A-l> <C-w>l
 " -- fzf
 nmap ; :Buffers<CR>
 nmap <leader>f :Files<CR>
+nmap <leader>fl :Lines<CR>
 
-" let g:fzf_preview_window = 'right:60%'
-let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_preview_window = []
 
-augroup fzf
+" LanguageClient-neovim
+let g:LanguageClient_serverCommands = {
+    \ 'go': ['gopls'],
+    \ }
+
+" Specific configuration for .go files via LSP
+function SetLSPShortcuts()
+
+  autocmd BufWritePre .go :call LanguageClient#textDocument_formatting_sync()
+
+  " Go to definition
+  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+
+  " Buffer-wide rename
+  nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
+
+  " Documentation hover
+  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+
+  " References
+  nnoremap <silent> lx :call LanguageClient#textDocument_references()<CR>
+
+  " Symbol search
+  nnoremap <silent> ls :call LanguageClient_textDocument_documentSymbol()<CR>
+
+  " Other options available, currently not configured:
+  " LanguageClient_workspace_applyEdit()
+  " LanguageClient#textDocument_completion()
+  " LanguageClient#textDocument_formatting()
+  " LanguageClient_contextMenu()
+  " LanguageClient#textDocument_typeDefinition()
+endfunction()
+
+augroup LSP
   autocmd!
-  autocmd! FileType fzf
-  autocmd  FileType fzf set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+  autocmd FileType go call SetLSPShortcuts()
 augroup END
 
-" -- vim-go
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
+" Don't use virtualtext as it can be distracting
+let g:LanguageClient_useVirtualText = "CodeLens"
 
-" Highlighting
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
+" -- deoplete
+" Completion manager which pairs nicely with LanguageClient-neovim
+" https://github.com/autozimu/LanguageClient-neovim/wiki/Recommended-Settings
+let g:deoplete#enable_at_startup = 1
 
-" Jump to declaration/symbol
-au FileType go nmap <leader>gt :GoDeclsDir<cr>
+call deoplete#custom#option('auto_complete_delay', 400)
 
-
-" disable vim-go :GoDef short cut (gd)
-" this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
-
-" goimports is basically gofmt + auto importing
-" but it may be slow on large code bases. Proceeding with caution for now
-let g:go_fmt_command = "goimports"
-
-" Automatically get signature/type info for object under cursor
-let g:go_auto_type_info = 1
-
-" -- vim-ale
-
-" Error and warning signs.
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
-
-" Use quickfix instead of the loclist
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-
-" Autocompletion
-let g:ale_completion_enabled = 1
-
-" Enable integration with airline.
-let g:airline#extensions#ale#enabled = 1
+" Use tab to autocomplete
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " -- vim-airline
 
 " Show a list of buffers (on top)
 let g:airline#extensions#tabline#enabled = 1
+
+" -- vim-gitgutter
+
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '>'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = '<'
+
+let g:gitgutter_override_sign_column_highlight = 1
+highlight SignColumn guibg=bg
+highlight SignColumn ctermbg=bg
