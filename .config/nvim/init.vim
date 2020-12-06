@@ -51,6 +51,10 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tmsvg/pear-tree'
 
+Plug 'nvim-treesitter/nvim-treesitter'
+
+Plug 'tpope/vim-surround'
+
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -77,6 +81,7 @@ nmap <leader>T :enew<CR>
 nmap <leader>l :bnext<CR>
 nmap <leader>k :bprevious<CR>
 nmap <leader>bq :bp <Bar> bd #<CR>
+
 
 " open new split panes to the bottom right
 set splitright
@@ -108,12 +113,12 @@ let g:LanguageClient_serverCommands = {
 " Specific configuration for .go files via LSP
 function SetLSPShortcuts()
 
-  autocmd BufWritePre .go :call LanguageClient#textDocument_formatting_sync()
+  autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
   " Go to definition
   nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
-  " Buffer-wide rename
+  " Symbol rename
   nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
 
   " Documentation hover
@@ -128,7 +133,6 @@ function SetLSPShortcuts()
   " Other options available, currently not configured:
   " LanguageClient_workspace_applyEdit()
   " LanguageClient#textDocument_completion()
-  " LanguageClient#textDocument_formatting()
   " LanguageClient_contextMenu()
   " LanguageClient#textDocument_typeDefinition()
 endfunction()
@@ -167,3 +171,7 @@ let g:gitgutter_sign_modified_removed = '<'
 let g:gitgutter_override_sign_column_highlight = 1
 highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
+
+" -- nvim-treesitter
+" At the moment, purely for highlighting
+lua require'treesitter_setup'
