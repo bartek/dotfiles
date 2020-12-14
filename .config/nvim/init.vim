@@ -6,8 +6,9 @@ set shiftwidth=4
 set softtabstop=-1
 set shiftround
 
-" Adjust tab size for Go code to align with defined shiftwidth
+" Adjust tab size for various file types
 autocmd Filetype go setlocal tabstop=4
+autocmd Filetype yaml setlocal tabstop=2
 
 " Line Wrapping
 set linebreak
@@ -55,11 +56,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'tpope/vim-surround'
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
+Plug 'neovim/nvim-lspconfig'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -68,8 +65,6 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-
-
 
 call plug#end()
 
@@ -105,46 +100,6 @@ nmap <leader>fl :Lines<CR>
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
 
-" LanguageClient-neovim
-let g:LanguageClient_serverCommands = {
-    \ 'go': ['gopls'],
-    \ }
-
-" Specific configuration for .go files via LSP
-function SetLSPShortcuts()
-
-  autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
-
-  " Go to definition
-  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-
-  " Symbol rename
-  nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
-
-  " Documentation hover
-  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-
-  " References
-  nnoremap <silent> lx :call LanguageClient#textDocument_references()<CR>
-
-  " Symbol search
-  nnoremap <silent> ls :call LanguageClient_textDocument_documentSymbol()<CR>
-
-  " Other options available, currently not configured:
-  " LanguageClient_workspace_applyEdit()
-  " LanguageClient#textDocument_completion()
-  " LanguageClient_contextMenu()
-  " LanguageClient#textDocument_typeDefinition()
-endfunction()
-
-augroup LSP
-  autocmd!
-  autocmd FileType go call SetLSPShortcuts()
-augroup END
-
-" Don't use virtualtext as it can be distracting
-let g:LanguageClient_useVirtualText = "CodeLens"
-
 " -- deoplete
 " Completion manager which pairs nicely with LanguageClient-neovim
 " https://github.com/autozimu/LanguageClient-neovim/wiki/Recommended-Settings
@@ -171,6 +126,9 @@ let g:gitgutter_sign_modified_removed = '<'
 let g:gitgutter_override_sign_column_highlight = 1
 highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
+
+" -- nvim-lspconfig
+lua require'lsp_setup'
 
 " -- nvim-treesitter
 " At the moment, purely for highlighting
