@@ -18,6 +18,7 @@ local buffer_setup = function(client)
     set_mapping('grs', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
 
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
 end
 
 require'lspconfig'.gopls.setup{
