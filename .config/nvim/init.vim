@@ -58,6 +58,8 @@ Plug 'tpope/vim-surround'
 
 Plug 'neovim/nvim-lspconfig'
 
+Plug 'dense-analysis/ale'
+
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -101,11 +103,25 @@ let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
 
 " -- deoplete
-" Completion manager which pairs nicely with LanguageClient-neovim
-" https://github.com/autozimu/LanguageClient-neovim/wiki/Recommended-Settings
+"
 let g:deoplete#enable_at_startup = 1
 
 call deoplete#custom#option('auto_complete_delay', 400)
+
+" ale
+let g:ale_linters = {
+\'go': ['golangci-lint'],
+\}
+
+let g:ale_go_golangci_lint_options = '--enable=gofmt,bodyclose,asciicheck'
+let g:ale_go_golangci_lint_package = 1
+
+let g:ale_fixers = {
+\'go': ['goimports'],
+\}
+
+let g:ale_fix_on_save = 1
+let g:ale_disable_lsp = 1
 
 " Use tab to autocomplete
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -133,3 +149,4 @@ lua require'lsp_setup'
 " -- nvim-treesitter
 " At the moment, purely for highlighting
 lua require'treesitter_setup'
+
