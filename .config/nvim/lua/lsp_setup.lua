@@ -1,3 +1,11 @@
+local completion = require('completion')
+
+vim.g.completion_enable_auto_signature = 1
+vim.g.completion_enable_auto_paren = 1
+vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
+
+completion.on_attach(client)
+
 local buffer_setup = function(client)
     local set_mapping = function(key, cmd, modes)
       modes = modes or {'n'}
@@ -20,6 +28,20 @@ local buffer_setup = function(client)
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 end
+
+-- Disable diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        -- Disable virtual text, use signs and show_line_diagnostics
+        virtual_text = false,
+
+        -- Show diagnostic signs instead
+        signs = true,
+
+        -- Don't run diagnostics when in insert mode
+        update_in_insert = false,
+    }
+)
 
 require'lspconfig'.gopls.setup{
     on_attach = buffer_setup,
