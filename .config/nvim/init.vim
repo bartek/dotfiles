@@ -60,13 +60,7 @@ Plug 'neovim/nvim-lspconfig'
 
 Plug 'dense-analysis/ale'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'nvim-lua/completion-nvim'
 
 call plug#end()
 
@@ -102,11 +96,19 @@ nmap <leader>fl :Lines<CR>
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
 
-" -- deoplete
-"
-let g:deoplete#enable_at_startup = 1
+" -- completion-nvim
+let g:completion_confirm_key = "\<C-y>"
+let g:completion_timer_cycle = 200 "default value is 80
 
-call deoplete#custom#option('auto_complete_delay', 400)
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
 
 " ale
 let g:ale_linters = {
@@ -122,9 +124,6 @@ let g:ale_fixers = {
 
 let g:ale_fix_on_save = 1
 let g:ale_disable_lsp = 1
-
-" Use tab to autocomplete
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " -- vim-airline
 
@@ -145,6 +144,9 @@ highlight SignColumn ctermbg=bg
 
 " -- nvim-lspconfig
 lua require'lsp_setup'
+
+" -- autocmd not available in Lua (as per above file) yet
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " -- nvim-treesitter
 " At the moment, purely for highlighting
