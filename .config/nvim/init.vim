@@ -32,6 +32,14 @@ nmap <leader>s :set spell!<CR>
 nnoremap <space> za
 
 set number
+set relativenumber
+
+" Toggle relativenumber in a few scenarios (e.g. when we leave insert mode)
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+augroup END
 
 " -- F-keys navigation bindings
 
