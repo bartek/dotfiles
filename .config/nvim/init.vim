@@ -60,7 +60,9 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tmsvg/pear-tree'
 
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
 Plug 'tpope/vim-surround'
 
@@ -127,7 +129,7 @@ let g:ale_go_golangci_lint_options = '--enable=gofmt,bodyclose,asciicheck'
 let g:ale_go_golangci_lint_package = 1
 
 let g:ale_fixers = {
-\'go': ['goimports'],
+\'go': ['gofmt'],
 \}
 
 let g:ale_fix_on_save = 1
