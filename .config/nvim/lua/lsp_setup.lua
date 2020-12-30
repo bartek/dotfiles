@@ -1,11 +1,5 @@
 local completion = require('completion')
 
-vim.g.completion_enable_auto_signature = 1
-vim.g.completion_enable_auto_paren = 1
-vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
-
-completion.on_attach(client)
-
 local buffer_setup = function(client)
     local set_mapping = function(key, cmd, modes)
       modes = modes or {'n'}
@@ -16,8 +10,6 @@ local buffer_setup = function(client)
 
     --  Go to definition
     set_mapping('gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
-    -- Symbol rename
-    set_mapping('gr', '<cmd>lua vim.lsp.buf.rename()<cr>')
     -- Hover
     set_mapping('K', '<cmd>lua vim.lsp.buf.hover()<cr>')
     -- References
@@ -27,6 +19,11 @@ local buffer_setup = function(client)
 
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+    vim.g.completion_enable_auto_signature = 1
+    vim.g.completion_enable_auto_paren = 1
+    vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
+
+    completion.on_attach(client)
 end
 
 -- Disable diagnostics

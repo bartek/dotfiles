@@ -3,4 +3,18 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,              -- false will disable the whole extension
   },
+  refactor = {
+      highlight_definitions = {
+          enable = true
+      },
+      higlight_current_scope = {
+          enable = true
+      },
+      smart_rename = {
+          enable = true,
+          keymaps = {
+              smart_rename = "gr"
+          }
+      },
+  }
 }
