@@ -18,7 +18,8 @@ set cpoptions+=n breakindentopt=sbr " display 'showbreak' symbol within the line
 
 set signcolumn=yes
 set foldlevel=99  " start unfolded by default
-set foldmethod=indent
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set hidden " allow switching buffers even if there are unsaved changes
 set updatetime=300
 
