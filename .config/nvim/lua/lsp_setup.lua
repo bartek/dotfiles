@@ -8,8 +8,6 @@ local buffer_setup = function(client)
       end
     end
 
-    --  Go to definition
-    set_mapping('gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
     -- Hover
     set_mapping('K', '<cmd>lua vim.lsp.buf.hover()<cr>')
     -- References
@@ -40,6 +38,26 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
+-- Configuration for gopls:
+-- https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-boolean
+-- And analysers:
+-- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
 require'lspconfig'.gopls.setup{
+    settings = {
+        gopls = {
+            gofumpt = true,
+            staticcheck = true,
+            analyses = {
+                unreachable = true,
+                shadow = true,
+                unusedparams = true,
+                atomic = true,
+                bools = true,
+                copylocks = true,
+                httpresponse = true,
+                printf = true,
+            },
+        }
+    },
     on_attach = buffer_setup,
 }
