@@ -70,8 +70,6 @@ Plug 'tpope/vim-surround'
 
 Plug 'neovim/nvim-lspconfig'
 
-" Plug 'dense-analysis/ale'
-
 Plug 'nvim-lua/completion-nvim'
 
 call plug#end()
@@ -125,20 +123,6 @@ set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
-
-" ale
-" \'go': ['golangci-lint'],
-let g:ale_linters = {}
-
-let g:ale_go_golangci_lint_options = '--enable=gofmt,bodyclose,asciicheck'
-let g:ale_go_golangci_lint_package = 1
-
-let g:ale_fixers = {
-\'go': ['goimports'],
-\}
-
-let g:ale_fix_on_save = 1
-let g:ale_disable_lsp = 1
 
 " -- vim-airline
 
