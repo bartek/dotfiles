@@ -1,6 +1,6 @@
 let g:mapleader = ","
 
-" Indentation
+" indentation
 set expandtab
 set shiftwidth=4
 set softtabstop=-1
@@ -12,10 +12,10 @@ autocmd Filetype yaml setlocal tabstop=2
 
 " Line Wrapping
 set linebreak
-set cmdheight=2
 set breakindent " keep indentation when wrapping lines
 set cpoptions+=n breakindentopt=sbr " display 'showbreak' symbol within the line number column
 
+set noshowmode
 set signcolumn=yes
 set foldlevel=99  " start unfolded by default
 set foldmethod=expr
@@ -25,6 +25,7 @@ set updatetime=300
 
 au BufRead,BufNewFile *.md setlocal textwidth=90
 au BufRead,BufNewFile *.go setlocal textwidth=90
+au BufWritePre *.go lua goimports(1000)
 
 " Interface-affecting
 nmap <leader>s :set spell!<CR>
@@ -50,7 +51,7 @@ noremap <F8> :cnext<cr>
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'dracula/vim'
+Plug 'sainnhe/edge'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -69,14 +70,18 @@ Plug 'tpope/vim-surround'
 
 Plug 'neovim/nvim-lspconfig'
 
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 Plug 'nvim-lua/completion-nvim'
 
 call plug#end()
 
 syntax enable
-colorscheme dracula
+if has('termguicolors')
+endif
+
+let g:edge_style = 'aura'
+colorscheme edge
 
 " Navigation between buffers
 nmap <leader>T :enew<CR>
@@ -122,15 +127,14 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 " ale
-let g:ale_linters = {
-\'go': ['golangci-lint'],
-\}
+" \'go': ['golangci-lint'],
+let g:ale_linters = {}
 
 let g:ale_go_golangci_lint_options = '--enable=gofmt,bodyclose,asciicheck'
 let g:ale_go_golangci_lint_package = 1
 
 let g:ale_fixers = {
-\'go': ['gofmt'],
+\'go': ['goimports'],
 \}
 
 let g:ale_fix_on_save = 1
@@ -155,6 +159,7 @@ highlight SignColumn ctermbg=bg
 
 " -- nvim-lspconfig
 lua require'lsp_setup'
+lua require'gofuncs'
 
 " -- autocmd not available in Lua (as per above file) yet
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
@@ -162,4 +167,5 @@ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 " -- nvim-treesitter
 " At the moment, purely for highlighting
 lua require'treesitter_setup'
+
 
