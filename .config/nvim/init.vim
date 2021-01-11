@@ -51,7 +51,7 @@ noremap <F8> :cnext<cr>
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'sainnhe/edge'
+Plug 'dracula/vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -75,11 +75,7 @@ Plug 'nvim-lua/completion-nvim'
 call plug#end()
 
 syntax enable
-if has('termguicolors')
-endif
-
-let g:edge_style = 'aura'
-colorscheme edge
+colorscheme dracula
 
 " Navigation between buffers
 nmap <leader>T :enew<CR>
