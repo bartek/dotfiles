@@ -15,6 +15,7 @@ set linebreak
 set breakindent " keep indentation when wrapping lines
 set cpoptions+=n breakindentopt=sbr " display 'showbreak' symbol within the line number column
 
+set virtualedit=all
 set noshowmode
 set signcolumn=yes
 set foldlevel=99  " start unfolded by default
