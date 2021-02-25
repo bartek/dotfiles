@@ -3,6 +3,20 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,              -- false will disable the whole extension
   },
+
+  indent = {
+    enable = true,
+  },
+
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<cr>",
+      node_incremental = "<cr>",
+      scope_incremental = "<cr>",
+      node_decremental = "<bs>",
+    },
+  },
   refactor = {
       highlight_definitions = {
           enable = true
