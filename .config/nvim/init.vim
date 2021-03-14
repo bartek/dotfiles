@@ -26,6 +26,9 @@ set updatetime=300
 
 au BufRead,BufNewFile *.md setlocal textwidth=90
 au BufRead,BufNewFile *.go setlocal textwidth=90
+
+
+" FIXME: This errors on newly created files
 au BufWritePre *.go lua goimports(1000)
 
 " Interface-affecting
@@ -52,7 +55,7 @@ noremap <F8> :cnext<cr>
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'dracula/vim'
+Plug 'chriskempson/base16-vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -61,7 +64,13 @@ Plug 'bling/vim-airline'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'airblade/vim-gitgutter'
+
+Plug 'onsails/lspkind-nvim'
+
 Plug 'tmsvg/pear-tree'
+
+Plug 'sebdah/vim-delve'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 
@@ -76,7 +85,8 @@ Plug 'nvim-lua/completion-nvim'
 call plug#end()
 
 syntax enable
-colorscheme dracula
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-default-dark
 
 " Navigation between buffers
 nmap <leader>T :enew<CR>
@@ -99,6 +109,12 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+" Abbreviations, mostly emojis
+
+ab :tada: 🎉
+ab :point_right: 👉
+ab :bulb: 💡
+
 " -- fzf
 nmap ; :Buffers<CR>
 nmap <leader>f :Files<CR>
@@ -106,6 +122,11 @@ nmap <leader>fl :Lines<CR>
 
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
+
+" -- vim-delve
+nnoremap <leader>db :DlvBuild<cr>
+nnoremap <leader>da :DlvAddBreakpoint<cr>
+nnoremap <leader>dcl :DlvClearAll<cr>
 
 " -- completion-nvim
 let g:completion_confirm_key = "\<C-y>"
@@ -135,8 +156,6 @@ let g:gitgutter_sign_removed_first_line = '^'
 let g:gitgutter_sign_modified_removed = '<'
 
 let g:gitgutter_override_sign_column_highlight = 1
-highlight SignColumn guibg=bg
-highlight SignColumn ctermbg=bg
 
 " -- nvim-lspconfig
 lua require'lsp_setup'
@@ -146,7 +165,7 @@ lua require'gofuncs'
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " -- nvim-treesitter
-" At the moment, purely for highlighting
 lua require'treesitter_setup'
 
-
+" -- lspkind-nvim
+lua require'lspkind_setup'
