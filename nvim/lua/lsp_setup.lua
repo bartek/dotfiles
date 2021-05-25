@@ -24,6 +24,9 @@ local buffer_setup = function(client)
     completion.on_attach(client)
 end
 
+-- Call goimports for Go files
+vim.api.nvim_command("au BufWritePre *.go lua goimports(1000)")
+
 -- Disable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -37,6 +40,11 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         update_in_insert = false,
     }
 )
+
+-- Configuration for zig
+require'lspconfig'.zls.setup{
+      on_attach = buffer_setup,
+}
 
 -- Configuration for gopls:
 -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-boolean
