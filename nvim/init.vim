@@ -24,12 +24,9 @@ set foldexpr=nvim_treesitter#foldexpr()
 set hidden " allow switching buffers even if there are unsaved changes
 set updatetime=300
 
-au BufRead,BufNewFile *.md setlocal textwidth=90
-au BufRead,BufNewFile *.go setlocal textwidth=90
-
-
-" FIXME: This errors on newly created files
-au BufWritePre *.go lua goimports(1000)
+au BufRead,BufNewFile *.md setlocal textwidth=80
+au BufRead,BufNewFile *.go setlocal textwidth=80
+au BufRead,BufNewFile *.zig setlocal textwidth=80
 
 " Interface-affecting
 nmap <leader>s :set spell!<CR>
@@ -57,16 +54,15 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'chriskempson/base16-vim'
 
+Plug 'folke/tokyonight.nvim'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 Plug 'junegunn/fzf.vim'
 
 Plug 'bling/vim-airline'
 
 Plug 'tpope/vim-fugitive'
-
-Plug 'airblade/vim-gitgutter'
-
-Plug 'onsails/lspkind-nvim'
 
 Plug 'tmsvg/pear-tree'
 
@@ -76,17 +72,28 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
+Plug 'simrat39/symbols-outline.nvim'
+
 Plug 'tpope/vim-surround'
 
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'nvim-lua/completion-nvim'
 
+Plug 'ziglang/zig.vim'
+
+" Diagnostics enhanced
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/lsp-trouble.nvim'
+
 call plug#end()
 
-syntax enable
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-default-dark
+
+let g:tokyonight_style = "night"
+let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+
+colorscheme tokyonight
 
 " Navigation between buffers
 nmap <leader>T :enew<CR>
@@ -99,21 +106,20 @@ nmap <leader>bq :bp <Bar> bd #<CR>
 set splitright
 set splitbelow
 
-" use alt+hjkl to move between split/vsplit panels
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+" use ctrl+hjkl to move between split/vsplit panels
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Abbreviations, mostly emojis
 
 ab :tada: 🎉
 ab :point_right: 👉
 ab :bulb: 💡
+ab :thinking: 🤔
+ab :eyes: 👀
+ab :memo: 📝
 
 " -- fzf
 nmap ; :Buffers<CR>
@@ -147,16 +153,6 @@ set shortmess+=c
 " Show a list of buffers (on top)
 let g:airline#extensions#tabline#enabled = 1
 
-" -- vim-gitgutter
-
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '>'
-let g:gitgutter_sign_removed = '-'
-let g:gitgutter_sign_removed_first_line = '^'
-let g:gitgutter_sign_modified_removed = '<'
-
-let g:gitgutter_override_sign_column_highlight = 1
-
 " -- nvim-lspconfig
 lua require'lsp_setup'
 lua require'gofuncs'
@@ -164,8 +160,27 @@ lua require'gofuncs'
 " -- autocmd not available in Lua (as per above file) yet
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
+" Don't run zig fmt on save, it's slow
+" It's slow, for some reason
+let g:zig_fmt_autosave = 0
+
 " -- nvim-treesitter
 lua require'treesitter_setup'
 
-" -- lspkind-nvim
-lua require'lspkind_setup'
+" -- symbols-outline.nvim
+lua require'symbols_setup'
+
+" -- trouble
+nnoremap <leader>xx <cmd>LspTroubleToggle<cr>
+nnoremap <leader>xw <cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>LspTroubleToggle lsp_document_diagnostics<cr>
+nnoremap <leader>xq <cmd>LspTroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>LspTroubleToggle loclist<cr>
+nnoremap gR <cmd>LspTroubleToggle lsp_references<cr>
+lua << EOF
+  require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
