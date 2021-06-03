@@ -34,6 +34,11 @@ nmap <leader>s :set spell!<CR>
 " Toggle folding
 nnoremap <space> za
 
+" Builtin terminal
+command! Term :bot sp | term
+autocmd TermOpen term://* startinsert
+tnoremap <expr> <Esc> &ft == 'fzf' ? '<Esc>' : '<C-\><C-n>'
+
 set number
 set relativenumber
 
@@ -57,14 +62,11 @@ Plug 'chriskempson/base16-vim'
 Plug 'folke/tokyonight.nvim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
 Plug 'junegunn/fzf.vim'
 
 Plug 'bling/vim-airline'
 
 Plug 'tpope/vim-fugitive'
-
-Plug 'tmsvg/pear-tree'
 
 Plug 'sebdah/vim-delve'
 
@@ -97,10 +99,9 @@ colorscheme tokyonight
 
 " Navigation between buffers
 nmap <leader>T :enew<CR>
-nmap <leader>l :bnext<CR>
-nmap <leader>k :bprevious<CR>
+nmap <leader>w :bnext<CR>
+nmap <leader>b :bprevious<CR>
 nmap <leader>bq :bp <Bar> bd #<CR>
-
 
 " open new split panes to the bottom right
 set splitright
@@ -124,7 +125,7 @@ ab :memo: 📝
 " -- fzf
 nmap ; :Buffers<CR>
 nmap <leader>f :Files<CR>
-nmap <leader>fl :Lines<CR>
+nmap <leader>l :Lines<CR>
 
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
