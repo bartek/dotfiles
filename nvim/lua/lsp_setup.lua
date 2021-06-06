@@ -41,11 +41,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
--- Configuration for zig
-require'lspconfig'.zls.setup{
-      on_attach = buffer_setup,
-}
-
 -- Configuration for gopls:
 -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-boolean
 -- And analysers:

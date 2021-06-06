@@ -137,7 +137,7 @@ nnoremap <leader>dcl :DlvClearAll<cr>
 
 " -- completion-nvim
 let g:completion_confirm_key = "\<C-y>"
-let g:completion_timer_cycle = 200 "default value is 80
+let g:completion_timer_cycle = 120 "default value is 80
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -156,12 +156,13 @@ let g:airline#extensions#tabline#enabled = 1
 
 " -- nvim-lspconfig
 lua require'lsp_setup'
+lua require'zls_setup'
 lua require'gofuncs'
 
 " -- autocmd not available in Lua (as per above file) yet
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
-" Don't run zig fmt on save, it's slow
+" Don't run zig fmt on save.
 " It's slow, for some reason
 let g:zig_fmt_autosave = 0
 
