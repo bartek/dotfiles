@@ -1,4 +1,4 @@
-local completion = require('completion')
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local buffer_setup = function(client)
     local set_mapping = function(key, cmd, modes)
@@ -16,22 +16,16 @@ local buffer_setup = function(client)
     set_mapping('grs', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
 
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    vim.g.completion_enable_auto_signature = 1
-    vim.g.completion_enable_auto_paren = 1
-    vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
-
-    completion.on_attach(client)
 end
 
 -- Call goimports for Go files
-vim.api.nvim_command("au BufWritePre *.go lua goimports(1000)")
+vim.api.nvim_command("au BufWritePre *.go lua goimports(500)")
 
 -- Disable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
         -- Disable virtual text, use signs and show_line_diagnostics
-        virtual_text = false,
+        virtual_text = true,
 
         -- Show diagnostic signs instead
         signs = true,
@@ -64,3 +58,7 @@ require'lspconfig'.gopls.setup{
     },
     on_attach = buffer_setup,
 }
+
+require'lspconfig'.intelephense.setup{}
+require 'lspconfig'.pyright.setup{}
+
