@@ -21,6 +21,10 @@ set signcolumn=yes
 set foldlevel=99  " start unfolded by default
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+set foldminlines=1
+set foldnestmax=3
+
+
 set hidden " allow switching buffers even if there are unsaved changes
 set updatetime=300
 
@@ -36,6 +40,7 @@ nnoremap <space> za
 
 " Builtin terminal
 command! Term :bot sp | term
+command! Termv :bot vs | term
 autocmd TermOpen term://* startinsert
 tnoremap <expr> <Esc> &ft == 'fzf' ? '<Esc>' : '<C-\><C-n>'
 
@@ -61,6 +66,9 @@ Plug 'chriskempson/base16-vim'
 
 Plug 'folke/tokyonight.nvim'
 
+" Less distractive writing
+Plug 'junegunn/goyo.vim'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -80,7 +88,9 @@ Plug 'tpope/vim-surround'
 
 Plug 'neovim/nvim-lspconfig'
 
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
 
 Plug 'ziglang/zig.vim'
 
@@ -117,6 +127,7 @@ nnoremap <C-H> <C-W><C-H>
 
 ab :tada: 🎉
 ab :point_right: 👉
+ab :clap: 👏
 ab :bulb: 💡
 ab :thinking: 🤔
 ab :eyes: 👀
@@ -127,24 +138,23 @@ nmap ; :Buffers<CR>
 nmap <leader>f :Files<CR>
 nmap <leader>l :Lines<CR>
 
-let g:fzf_layout = { 'down': '40%' }
+let g:fzf_layout =  { 'window' : { 'width': 0.9, 'height': 0.6, 'highlight': 'Normal' } }
 let g:fzf_preview_window = []
+
+" -- goyo
+let g:goyo_width = 120
 
 " -- vim-delve
 nnoremap <leader>db :DlvBuild<cr>
 nnoremap <leader>da :DlvAddBreakpoint<cr>
 nnoremap <leader>dcl :DlvClearAll<cr>
 
-" -- completion-nvim
-let g:completion_confirm_key = "\<C-y>"
-let g:completion_timer_cycle = 120 "default value is 80
-
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
+set completeopt=menu,menuone,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
@@ -158,6 +168,7 @@ let g:airline#extensions#tabline#enabled = 1
 lua require'lsp_setup'
 lua require'zls_setup'
 lua require'gofuncs'
+lua require'cmp_setup'
 
 " -- autocmd not available in Lua (as per above file) yet
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
