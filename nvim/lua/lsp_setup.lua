@@ -1,4 +1,5 @@
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local buffer_setup = function(client)
     local set_mapping = function(key, cmd, modes)
@@ -40,6 +41,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- And analysers:
 -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
 require'lspconfig'.gopls.setup{
+    capabilities = capabilities,
     settings = {
         gopls = {
             gofumpt = true,
@@ -60,5 +62,5 @@ require'lspconfig'.gopls.setup{
 }
 
 require'lspconfig'.intelephense.setup{}
-require 'lspconfig'.pyright.setup{}
+require'lspconfig'.pyright.setup{}
 
