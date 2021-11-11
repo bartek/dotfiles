@@ -91,6 +91,8 @@ augroup END
 " Quickfix
 noremap <F7> :cprevious<cr>
 noremap <F8> :cnext<cr>
+" Symbols
+noremap <F2> :SymbolsOutline<cr>
 
 call plug#begin('~/.vim/plugged')
 
