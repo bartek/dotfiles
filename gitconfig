@@ -1,0 +1,9 @@
+[user]
+    name = Bartek Ciszkowski
+    email = hello@justbartek.ca
+[alias]
+    lg = log --graph --decorate --pretty=oneline --abbrev-commit
+[color]
+    ui = auto
+[url "git@github.com:"]
+	insteadOf = https://github.com/
