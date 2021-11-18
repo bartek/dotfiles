@@ -1,0 +1,8 @@
+function zshaddhistory() {
+	echo "${1%%$'\n'}⋮${PWD}   " >> ~/.zsh_history_ext
+}
+
+# Ref: https://github.com/natethinks/jog/
+function jog() {
+    grep -v "jog" ~/.zsh_history_ext | grep -a --color=never "${PWD}   " | cut -f1 -d"⋮" | tail
+}

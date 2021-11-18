@@ -1,0 +1,32 @@
+# Ref: https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+################
+# Kitty/Profile
+# ##############
+
+if test -e "$HOME/kitty/shell-integration/kitty.zsh"; then source "$HOME/kitty/shell-integration/kitty.zsh"; fi
+
+# pure
+fpath+=$HOME/.zsh/pure
+autoload -U promptinit; promptinit
+prompt pure
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# Fix kitty not playing nice with SSH
+export TERM=xterm-256color
+
+###################
+# Improve utilities
+# #################
+
+# cat with wings
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+source ~/.zsh/aliases
+source ~/.zsh/functions
