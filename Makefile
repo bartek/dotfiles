@@ -6,6 +6,7 @@ sync:
 	[ -f ~/.zsh/functions ] || ln -s $(PWD)/zsh/functions ~/.zsh/functions
 	[ -f ~/.zsh/aliases ] || ln -s $(PWD)/zsh/aliases ~/.zsh/aliases
 	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
+	[ -f ~/.tigrc ] || ln -s $(PWD)/tigrc ~/.tigrc
 
 clean:
 	rm -f ~/.gitconfig
