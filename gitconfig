@@ -8,4 +8,6 @@
 [color]
     ui = auto
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/
+[init]
+    defaultBranch = main
