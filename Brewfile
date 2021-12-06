@@ -1,3 +1,8 @@
+# Applications
+cask "kitty"
+cask "karabiner-elements"
+
+# Packages
 brew "awscli"
 brew "fzf"
 brew "git"
