@@ -10,6 +10,7 @@ sync:
 	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
 	[ -f ~/.tigrc ] || ln -s $(PWD)/tigrc ~/.tigrc
 	[ -f ~/.config/kitty/kitty.conf ] || ln -s $(PWD)/kitty/kitty.conf ~/.config/kitty/kitty.conf
+	[ -f ~/.config/nvim ] || ln -s $(PWD)/nvim ~/.config/nvim
 
 clean:
 	rm -f ~/.gitconfig
