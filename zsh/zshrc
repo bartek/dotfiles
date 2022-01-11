@@ -44,3 +44,6 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 source ~/.zsh/aliases
 source ~/.zsh/functions
 
+# Local configuration
+source ~/.zsh/local
+

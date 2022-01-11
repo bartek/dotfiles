@@ -23,10 +23,10 @@ end
 -- Call goimports for Go files
 vim.api.nvim_command("au BufWritePre *.go lua goimports(500)")
 
--- Disable diagnostics
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-        -- Disable virtual text, use signs and show_line_diagnostics
+        -- Enable underline
         virtual_text = true,
 
         -- Show diagnostic signs instead
@@ -69,4 +69,4 @@ require'lspconfig'.gopls.setup{
 
 require'lspconfig'.intelephense.setup{}
 require'lspconfig'.pyright.setup{}
-
+require'lspconfig'.rust_analyzer.setup{}

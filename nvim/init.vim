@@ -138,6 +138,10 @@ Plug 'ziglang/zig.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/lsp-trouble.nvim'
 
+" Rust
+Plug 'simrat39/rust-tools.nvim'
+
+
 call plug#end()
 
 let base16colorspace=256  " Access colors present in 256 colorspace
@@ -210,9 +214,7 @@ lua require'lsp_setup'
 lua require'zls_setup'
 lua require'gofuncs'
 lua require'cmp_setup'
-
-" -- autocmd not available in Lua (as per above file) yet
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+lua require'rust'
 
 " Don't run zig fmt on save.
 " It's slow, for some reason

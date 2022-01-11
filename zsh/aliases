@@ -7,5 +7,5 @@ alias cdr='cd $(git rev-parse --show-cdup)'
 
 
 # Go
-alias bt="go build ./... && go test -coverprofile=coverage.out ./..."
-alias cv="go tool cover -html=coverage.out"
+alias bt="go build ./... && go test -coverprofile=.coverage.out ./..."
+alias cv="go tool cover -html=.coverage.out"
