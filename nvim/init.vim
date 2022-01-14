@@ -179,9 +179,11 @@ ab :eyes: 👀
 ab :memo: 📝
 
 " -- fzf
-nmap ; :Buffers<CR>
-nmap <leader>f :Files<CR>
-nmap <leader>l :Lines<CR>
+" nmap ; :Buffers<CR>
+nmap <leader>fb :Buffers<CR>
+nmap <leader>ff :Files<CR>
+nmap <leader>fl :Lines<CR>
+nmap <leader>fg :Ag<CR>
 
 let g:fzf_layout =  { 'window' : { 'width': 0.9, 'height': 0.6, 'highlight': 'Normal' } }
 let g:fzf_preview_window = []
