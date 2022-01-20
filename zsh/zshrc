@@ -46,4 +46,3 @@ source ~/.zsh/functions
 
 # Local configuration
 source ~/.zsh/local
-
