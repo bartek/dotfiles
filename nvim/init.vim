@@ -107,6 +107,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'bling/vim-airline'
+Plug 'mkitt/tabline.vim'
 
 Plug 'tpope/vim-fugitive'
 
@@ -141,6 +142,7 @@ Plug 'folke/lsp-trouble.nvim'
 " Rust
 Plug 'simrat39/rust-tools.nvim'
 
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -208,8 +210,12 @@ set shortmess+=c
 
 " -- vim-airline
 
-" Show a list of buffers (on top)
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_section_z = airline#section#create(['%4l', ':%3v']) " Only show the line & col number
+let g:airline_inactive_collapse = 1 " Only indicate filename on inactive buffers
+
+let g:airline#extensions#tabline#enabled = 1 " Enable tabline integration
+let g:airline#extensions#tabline#buffer_idx_mode = 1 " Leader # navigation
+
 
 " -- nvim-lspconfig
 lua require'lsp_setup'
