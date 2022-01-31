@@ -46,3 +46,5 @@ source ~/.zsh/functions
 
 # Local configuration
 source ~/.zsh/local
+
+autoload -Uz compinit && compinit
