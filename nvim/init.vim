@@ -216,6 +216,9 @@ let g:airline_inactive_collapse = 1 " Only indicate filename on inactive buffers
 let g:airline#extensions#tabline#enabled = 1 " Enable tabline integration
 let g:airline#extensions#tabline#buffer_idx_mode = 1 " Leader # navigation
 
+" Jump back to first tab
+nmap <leader>1 <Plug>AirlineSelectTab1 
+
 
 " -- nvim-lspconfig
 lua require'lsp_setup'
