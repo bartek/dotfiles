@@ -45,7 +45,7 @@ require'lspconfig'.gopls.setup{
     capabilities = capabilities,
     settings = {
         gopls = {
-            gofumpt = true,
+            gofumpt = false,
             staticcheck = true,
             analyses = {
                 assign = true,
