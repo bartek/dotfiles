@@ -27,7 +27,7 @@ vim.api.nvim_command("au BufWritePre *.go lua goimports(500)")
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
         -- Enable underline
-        virtual_text = true,
+        virtual_text = false,
 
         -- Show diagnostic signs instead
         signs = true,
