@@ -246,6 +246,8 @@ nnoremap <leader>xl <cmd>LspTroubleToggle loclist<cr>
 nnoremap gR <cmd>LspTroubleToggle lsp_references<cr>
 lua << EOF
 require("trouble").setup {
+    height = 5,
+    mode = "document_diagnostics",
     icons = false,
     fold_open = "v", -- icon used for open folds
     fold_closed = ">", -- icon used for closed folds
