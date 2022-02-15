@@ -14,7 +14,10 @@ source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
 SAVEHIST=10000000
-
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+setopt HIST_FIND_NO_DUPS
 
 # Ref: https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
