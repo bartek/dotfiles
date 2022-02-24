@@ -13,4 +13,4 @@
 [init]
     defaultBranch = main
 [commit]
-	verbose = true
+    verbose = true

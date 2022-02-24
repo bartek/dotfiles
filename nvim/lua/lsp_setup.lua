@@ -67,6 +67,5 @@ require'lspconfig'.gopls.setup{
     on_attach = buffer_setup,
 }
 
-require'lspconfig'.intelephense.setup{}
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.rust_analyzer.setup{}
