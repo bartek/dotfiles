@@ -137,7 +137,7 @@ Plug 'ziglang/zig.vim'
 
 " Diagnostics enhanced
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/lsp-trouble.nvim'
+Plug 'folke/trouble.nvim'
 
 " Rust
 Plug 'simrat39/rust-tools.nvim'
@@ -238,12 +238,12 @@ lua require'treesitter_setup'
 lua require'symbols_setup'
 
 " -- trouble
-nnoremap <leader>xx <cmd>LspTroubleToggle<cr>
-nnoremap <leader>xw <cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>
-nnoremap <leader>xd <cmd>LspTroubleToggle lsp_document_diagnostics<cr>
-nnoremap <leader>xq <cmd>LspTroubleToggle quickfix<cr>
-nnoremap <leader>xl <cmd>LspTroubleToggle loclist<cr>
-nnoremap gR <cmd>LspTroubleToggle lsp_references<cr>
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 lua << EOF
 require("trouble").setup {
     height = 5,
