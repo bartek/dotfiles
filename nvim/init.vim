@@ -100,9 +100,6 @@ Plug 'chriskempson/base16-vim'
 
 Plug 'folke/tokyonight.nvim'
 
-" Less distractive writing
-Plug 'junegunn/goyo.vim'
-
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -127,6 +124,7 @@ Plug 'L3MON4D3/luasnip'
 
 " Completes words from the current buffer you're in
 Plug 'hrsh7th/cmp-buffer'
+
 " Help complete files
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
@@ -189,9 +187,6 @@ nmap <leader>fg :Ag<CR>
 
 let g:fzf_layout =  { 'window' : { 'width': 0.9, 'height': 0.6, 'highlight': 'Normal' } }
 let g:fzf_preview_window = []
-
-" -- goyo
-let g:goyo_width = 120
 
 " -- vim-delve
 nnoremap <leader>db :DlvBuild<cr>
