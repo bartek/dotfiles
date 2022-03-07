@@ -3,6 +3,7 @@ all: sync
 sync:
 	mkdir -p ~/.zsh
 	mkdir -p ~/.config/kitty
+	mkdir -p ~/.bin
 
 	[ -f ~/.zshrc ] || ln -s $(PWD)/zsh/zshrc ~/.zshrc
 	[ -f ~/.zsh/functions ] || ln -s $(PWD)/zsh/functions ~/.zsh/functions
@@ -10,7 +11,9 @@ sync:
 	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
 	[ -f ~/.tigrc ] || ln -s $(PWD)/tigrc ~/.tigrc
 	[ -f ~/.config/kitty/kitty.conf ] || ln -s $(PWD)/kitty/kitty.conf ~/.config/kitty/kitty.conf
-	[ -f ~/.config/nvim ] || ln -s $(PWD)/nvim ~/.config/nvim
+	[ -d ~/.config/nvim ] || ln -s $(PWD)/nvim ~/.config/nvim
+
+	ln -sf $(PWD)/util/* ~/.bin/
 
 clean:
 	rm -f ~/.gitconfig
@@ -18,5 +21,6 @@ clean:
 	rm -f ~/.zsh/aliases
 	rm -f ~/.tigrc
 	rm -f ~/.config/kitty
+	rm -f ~/.bin
 
 .PHONY: all clean sync
