@@ -2,7 +2,7 @@ local lspconfig = require('lspconfig')
 
 local buffer_setup = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    require('completion').on_attach()
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 end
 
 local servers = {'zls'}
