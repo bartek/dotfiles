@@ -122,6 +122,9 @@ Plug 'neovim/nvim-lspconfig'
 
 Plug 'L3MON4D3/luasnip'
 
+" Draw venn diagrams in neovim!
+Plug 'jbyuki/venn.nvim'
+
 " Completes words from the current buffer you're in
 Plug 'hrsh7th/cmp-buffer'
 
@@ -222,15 +225,15 @@ lua require'gofuncs'
 lua require'cmp_setup'
 lua require'rust'
 
-" Don't run zig fmt on save.
-" It's slow, for some reason
-let g:zig_fmt_autosave = 0
-
 " -- nvim-treesitter
 lua require'treesitter_setup'
 
 " -- symbols-outline.nvim
 lua require'symbols_setup'
+
+
+" -- venn.nvim
+lua require'venn_setup'
 
 " -- trouble
 nnoremap <leader>xx <cmd>TroubleToggle<cr>
@@ -257,3 +260,8 @@ require("trouble").setup {
     use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 }
 EOF
+
+" -- copilot
+imap <silent><script><expr> <C-K> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
