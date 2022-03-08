@@ -3,7 +3,7 @@ local cmp = require'cmp'
 cmp.setup({
     completion = {
         -- The minimum length of word to complete
-        keyword_length = 5,
+        keyword_length = 4,
     },
     experimental = {
       ghost_text = true,
