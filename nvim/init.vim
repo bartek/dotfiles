@@ -98,12 +98,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'chriskempson/base16-vim'
 
-Plug 'folke/tokyonight.nvim'
+" Plug 'folke/tokyonight.nvim'
+Plug 'rebelot/kanagawa.nvim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'bling/vim-airline'
+Plug 'feline-nvim/feline.nvim'
 Plug 'mkitt/tabline.vim'
 
 Plug 'tpope/vim-fugitive'
@@ -149,11 +150,13 @@ call plug#end()
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 
-let g:tokyonight_style = "night"
-let g:tokyonight_italic_comments = 1
-let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-
-colorscheme tokyonight
+" tokyonight -- trying kanagawa
+" let g:tokyonight_style = "night"
+" let g:tokyonight_italic_comments = 1
+" let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+" 
+" colorscheme tokyonight
+colorscheme kanagawa
 
 " Navigation between buffers
 nmap <leader>T :enew<CR>
@@ -206,18 +209,6 @@ set completeopt=menu,menuone,noselect
 " Avoid showing message extra message when using completion
 set shortmess+=c
 
-" -- vim-airline
-
-let g:airline_section_z = airline#section#create(['%4l', ':%3v']) " Only show the line & col number
-let g:airline_inactive_collapse = 1 " Only indicate filename on inactive buffers
-
-let g:airline#extensions#tabline#enabled = 1 " Enable tabline integration
-let g:airline#extensions#tabline#buffer_idx_mode = 1 " Leader # navigation
-
-" Jump back to first tab
-nmap <leader>1 <Plug>AirlineSelectTab1 
-
-
 " -- nvim-lspconfig
 lua require'lsp_setup'
 lua require'zls_setup'
@@ -261,7 +252,5 @@ require("trouble").setup {
 }
 EOF
 
-" -- copilot
-imap <silent><script><expr> <C-K> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
-
+" -- feline
+lua require('feline').setup()
