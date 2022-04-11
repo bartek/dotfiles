@@ -1,5 +1,17 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
+  ensure_installed = {
+        "bash",
+        "cmake",
+        "dockerfile",
+        "go",
+        "gomod",
+        "lua",
+        "nix",
+        "python",
+        "rust",
+        "svelte",
+        "typescript",
+  },
   highlight = {
     enable = true,              -- false will disable the whole extension
     additional_vim_regex_highlighting = true, -- improve highlighting, e.g. when spell is set
