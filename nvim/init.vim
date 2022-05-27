@@ -101,9 +101,6 @@ Plug 'chriskempson/base16-vim'
 " Plug 'folke/tokyonight.nvim'
 Plug 'rebelot/kanagawa.nvim'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
 Plug 'feline-nvim/feline.nvim'
 Plug 'mkitt/tabline.vim'
 
@@ -146,6 +143,9 @@ Plug 'simrat39/rust-tools.nvim'
 
 Plug 'github/copilot.vim'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 
 let base16colorspace=256  " Access colors present in 256 colorspace
@@ -184,12 +184,11 @@ ab :thinking: 🤔
 ab :eyes: 👀
 ab :memo: 📝
 
-" -- fzf
-" nmap ; :Buffers<CR>
-nmap <leader>fb :Buffers<CR>
-nmap <leader>ff :Files<CR>
-nmap <leader>fl :Lines<CR>
-nmap <leader>fg :Ag<CR>
+" -- telescope
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 let g:fzf_layout =  { 'window' : { 'width': 0.9, 'height': 0.6, 'highlight': 'Normal' } }
 let g:fzf_preview_window = []
@@ -221,7 +220,6 @@ lua require'treesitter_setup'
 
 " -- symbols-outline.nvim
 lua require'symbols_setup'
-
 
 " -- venn.nvim
 lua require'venn_setup'
