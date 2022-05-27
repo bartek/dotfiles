@@ -211,7 +211,6 @@ set shortmess+=c
 " -- nvim-lspconfig
 lua require'lsp_setup'
 lua require'zls_setup'
-lua require'gofuncs'
 lua require'cmp_setup'
 lua require'rust'
 
