@@ -141,8 +141,6 @@ Plug 'folke/trouble.nvim'
 " Rust
 Plug 'simrat39/rust-tools.nvim'
 
-Plug 'github/copilot.vim'
-
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
