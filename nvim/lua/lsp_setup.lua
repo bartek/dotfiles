@@ -49,8 +49,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-        -- Enable underline
-        virtual_text = false,
+        -- Enable diagnostics in line
+        virtual_text = true,
 
         -- Show diagnostic signs instead
         signs = true,
