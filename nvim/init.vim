@@ -93,6 +93,7 @@ noremap <F7> :cprevious<cr>
 noremap <F8> :cnext<cr>
 " Symbols
 noremap <F2> :SymbolsOutline<cr>
+noremap <F3> :copen<cr>
 
 call plug#begin('~/.vim/plugged')
 
@@ -119,6 +120,7 @@ Plug 'tpope/vim-surround'
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'L3MON4D3/luasnip'
+Plug 'rafamadriz/friendly-snippets'
 
 " Draw venn diagrams in neovim!
 Plug 'jbyuki/venn.nvim'
@@ -211,6 +213,7 @@ lua require'lsp_setup'
 lua require'zls_setup'
 lua require'cmp_setup'
 lua require'rust'
+lua require'snippets'
 
 " -- nvim-treesitter
 lua require'treesitter_setup'
