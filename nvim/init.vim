@@ -143,6 +143,8 @@ Plug 'folke/trouble.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+Plug 'github/copilot.vim'
+
 call plug#end()
 
 let base16colorspace=256  " Access colors present in 256 colorspace
