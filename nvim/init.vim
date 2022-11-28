@@ -140,9 +140,6 @@ Plug 'ziglang/zig.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 
-" Rust
-Plug 'simrat39/rust-tools.nvim'
-
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
@@ -212,7 +209,6 @@ set shortmess+=c
 lua require'lsp_setup'
 lua require'zls_setup'
 lua require'cmp_setup'
-lua require'rust'
 lua require'snippets'
 
 " -- nvim-treesitter
