@@ -22,7 +22,7 @@ end
 
 -- On save, call goimports for Go files. 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.go" },
+  pattern = { "*.go", "*.ml", "*.lua", "*.yaml" },
   callback = function()
 	  vim.lsp.buf.formatting_sync(nil, 3000)
   end,
@@ -49,6 +49,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = true,
         -- Enable diagnostics in line
         virtual_text = true,
 
@@ -92,3 +93,4 @@ require'lspconfig'.gopls.setup{
 
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.ocamlls.setup{}

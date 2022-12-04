@@ -99,7 +99,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'chriskempson/base16-vim'
 
-" Plug 'folke/tokyonight.nvim'
 Plug 'rebelot/kanagawa.nvim'
 
 Plug 'feline-nvim/feline.nvim'
@@ -149,16 +148,12 @@ call plug#end()
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 
-" tokyonight -- trying kanagawa
-" let g:tokyonight_style = "night"
-" let g:tokyonight_italic_comments = 1
-" let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-" 
-" colorscheme tokyonight
 colorscheme kanagawa
 
 " Navigation between buffers
 nmap <leader>T :enew<CR>
+
+
 nmap <leader>w :bnext<CR>
 nmap <leader>b :bprevious<CR>
 nmap <leader>bq :bp <Bar> bd #<CR>
@@ -248,5 +243,5 @@ require("trouble").setup {
 }
 EOF
 
-" -- feline
+" -- feline (statusbar)
 lua require('feline').setup()
