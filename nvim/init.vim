@@ -24,6 +24,8 @@ set foldexpr=nvim_treesitter#foldexpr()
 set foldminlines=1
 set foldnestmax=3
 
+set listchars=tab:»\ ,trail:·,nbsp:␣,extends:❯,precedes:❮,eol:¬
+set list
 
 set hidden " allow switching buffers even if there are unsaved changes
 set updatetime=300
