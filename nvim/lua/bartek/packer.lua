@@ -47,6 +47,10 @@ local function packer_startup()
   use 'hrsh7th/nvim-cmp'
 
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+
+  use 'feline-nvim/feline.nvim'
+
+  use 'github/copilot.vim'
 end
 
 local function init()
