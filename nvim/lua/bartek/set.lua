@@ -2,6 +2,7 @@ local g = vim.g
 local opt = vim.opt
 
 g.mapleader = ","
+g.base16colorspace = "256"
 
 -- Indentation
 opt.expandtab=true
