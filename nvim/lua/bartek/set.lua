@@ -24,6 +24,10 @@ local file_indents = {
   },
 }
 
+-- Open new split panes to the bottom right
+opt.splitright=true
+opt.splitbelow=true
+
 -- incremental search
 opt.hlsearch=false
 opt.incsearch=true
