@@ -51,6 +51,10 @@ local function packer_startup()
   use 'feline-nvim/feline.nvim'
 
   use 'github/copilot.vim'
+
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
+
 end
 
 local function init()

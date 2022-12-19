@@ -6,9 +6,11 @@ g.base16colorspace = "256"
 
 -- Indentation
 opt.expandtab=true
-opt.shiftwidth=4
-opt.softtabstop=-1 -- -1 uses shiftwidth value
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
 opt.shiftround=true -- indents to next multiple of shiftwidth
+opt.smartindent=true -- indents based on previous line
 
 -- Adjust tab size for various filetypes
 local file_indents = {
@@ -30,6 +32,7 @@ opt.scrolloff=8
 -- Line wrapping
 opt.linebreak=true
 opt.breakindent=true -- keep indentation when wrapping lines
+opt.breakindentopt='sbr,shift:20'
 
 opt.virtualedit="all"
 opt.showmode=false

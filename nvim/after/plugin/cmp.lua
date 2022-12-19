@@ -5,6 +5,14 @@ cmp.setup({
       ghost_text = true,
       native_menu = false,
     },
+    snippet = {
+        expand = function(args)
+
+        -- For `luasnip` user.
+        require('luasnip').lsp_expand(args.body)
+
+        end,
+    },
     mapping = {
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -16,6 +24,7 @@ cmp.setup({
     },
     sources = {
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
         { name = 'buffer', keyword_length = 5 },
     }
 })
