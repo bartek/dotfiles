@@ -12,7 +12,6 @@ fi
 
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
-
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
 SAVEHIST=10000000
