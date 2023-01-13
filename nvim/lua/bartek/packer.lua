@@ -40,6 +40,9 @@ local function packer_startup()
 
   use 'nvim-treesitter/nvim-treesitter-refactor'
 
+  -- git
+  use 'tpope/vim-fugitive'
+
   -- autocomplete and lsp support
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
