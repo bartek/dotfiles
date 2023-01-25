@@ -59,6 +59,9 @@ local function packer_startup()
   use 'saadparwaiz1/cmp_luasnip'
 
   use 'ziglang/zig.vim'
+
+  use 'ray-x/go.nvim'
+  use 'ray-x/guihua.lua' -- recommended if need floating window support
 end
 
 local function init()
