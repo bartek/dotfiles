@@ -62,6 +62,8 @@ local function packer_startup()
 
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommended if need floating window support
+
+  use 'sebdah/vim-delve'
 end
 
 local function init()
