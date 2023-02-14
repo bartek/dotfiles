@@ -55,9 +55,6 @@ local function packer_startup()
 
   use 'zbirenbaum/copilot.lua'
 
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
-
   use 'ziglang/zig.vim'
 
   use 'ray-x/go.nvim'
