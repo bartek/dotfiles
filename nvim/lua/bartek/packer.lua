@@ -63,7 +63,11 @@ local function packer_startup()
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommended if need floating window support
 
-  use 'sebdah/vim-delve'
+  use 'sebdah/vim-delve' -- go debug
+
+  use 'simrat39/symbols-outline.nvim'
+
+  use 'bartek/epochconverter.nvim' -- my own little thing!
 end
 
 local function init()
