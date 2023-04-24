@@ -30,3 +30,6 @@ vim.keymap.set("n", "<leader>T", ":enew<CR>")
 vim.keymap.set("n", "<leader>w", ":bnext<CR>")
 vim.keymap.set("n", "<leader>b", ":bprevious<CR>")
 vim.keymap.set("n", "<leader>bq", ":bp <Bar> bd#<CR>")
+
+-- Format current buffer with jq
+vim.keymap.set("n", "<leader>=j", ":%!jq .<CR>")
