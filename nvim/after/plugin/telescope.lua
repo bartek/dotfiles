@@ -7,5 +7,5 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>ws', builtin.lsp_workspace_symbols, {})
 vim.keymap.set('n', '<leader>xx', function()
-    builtin.diagnostics { bufnr = 0 }
+    builtin.diagnostics { wrap_results = true, bufnr = 0 }
 end)
