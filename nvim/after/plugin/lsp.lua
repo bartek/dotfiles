@@ -21,13 +21,6 @@ end
 
 -- On save, call goimports for Go files. 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.go", "*.ml", "*.lua", "*.yaml" },
-  callback = function()
-	  vim.lsp.buf.formatting_sync(nil, 3000)
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "*.go" },
     callback = function()
         local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
@@ -79,6 +72,7 @@ require'lspconfig'.gopls.setup{
                 httpresponse = true,
                 printf = true,
                 shadow = true,
+                nilness = true,
                 stdmethods = true,
                 stringintconv = true,
                 unmarshal = true,
@@ -90,7 +84,9 @@ require'lspconfig'.gopls.setup{
     on_attach = buffer_setup,
 }
 
-require'lspconfig'.zls.setup{}
+require'lspconfig'.zls.setup{
+    capabilities = capabilities,
+}
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.rust_analyzer.setup{}
 require'lspconfig'.ocamlls.setup{}
