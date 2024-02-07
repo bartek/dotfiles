@@ -7,7 +7,7 @@ cask "ngrok"
 # Packages
 brew "awscli"
 brew "bat"
-brew "colima"
+brew "tmux"
 brew "docker"
 brew "fzf"
 brew "git"
