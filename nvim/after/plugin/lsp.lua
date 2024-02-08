@@ -19,9 +19,16 @@ local buffer_setup = function(client)
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
--- On save, call goimports for Go files. 
+-- TODO: Can this be merged with below BufWritePre?
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*.go" },
+  pattern = { "*.go", "*.ml", "*.lua", "*.yaml" },
+  callback = function()
+    vim.lsp.buf.format({async = true})
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.go", "*.zig" },
     callback = function()
         local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
         params.context = {only = {"source.organizeImports"}}
