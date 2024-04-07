@@ -42,8 +42,7 @@ export TERM=xterm-256color
 # Improve utilities
 # #################
 
-# cat with wings
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export EDITOR=vim
 
 source ~/.zsh/aliases
 source ~/.zsh/functions
@@ -64,6 +63,9 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(direnv hook zsh)"
 export DIRENV_LOG_FORMAT= # Make direnv quiet
 
+# fuzzy finding
+export PATH="$PATH:$HOME/bin/fzf-zsh-plugin/bin"
+source $HOME/bin/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
-# go
+# golang
 export PATH="$PATH:$(go env GOPATH)/bin"
