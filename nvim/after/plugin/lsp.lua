@@ -19,17 +19,10 @@ local buffer_setup = function(client)
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
--- TODO: Can this be merged with below BufWritePre?
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.go", "*.ml", "*.lua", "*.yaml" },
-  callback = function()
-    vim.lsp.buf.format({async = true})
-  end,
-})
-
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "*.go", "*.zig" },
     callback = function()
+        vim.lsp.buf.format({async = true})
         local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
         params.context = {only = {"source.organizeImports"}}
 
