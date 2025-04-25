@@ -67,11 +67,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
+
 -- Configuration for gopls:
 -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md#staticcheck-boolean
 -- And analysers:
 -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
-require'lspconfig'.gopls.setup{
+vim.lsp.config.gopls = {
     capabilities = capabilities,
     settings = {
         gopls = {
@@ -98,7 +99,7 @@ require'lspconfig'.gopls.setup{
     on_attach = buffer_setup,
 }
 
-require'lspconfig'.zls.setup{
-    capabilities = capabilities,
-}
-require'lspconfig'.pyright.setup{}
+
+vim.lsp.config.zls = { capabilities = capabilities }
+
+vim.lsp.enable({'gopls', 'zls', 'pyright'})
