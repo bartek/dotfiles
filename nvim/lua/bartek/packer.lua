@@ -65,8 +65,6 @@ local function packer_startup()
 
   use 'sebdah/vim-delve' -- go debug
 
-  use 'simrat39/symbols-outline.nvim'
-
   use 'bartek/epochconverter.nvim' -- my own little thing!
 
   use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
