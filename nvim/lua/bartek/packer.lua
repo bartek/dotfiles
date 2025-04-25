@@ -54,8 +54,6 @@ local function packer_startup()
 
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
 
-  use 'feline-nvim/feline.nvim'
-
   use 'zbirenbaum/copilot.lua'
 
   use 'ziglang/zig.vim'
