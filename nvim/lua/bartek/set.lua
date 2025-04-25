@@ -62,5 +62,4 @@ opt.relativenumber=true
 opt.hidden=true -- allow switching buffers if there are unsaved changes
 opt.updatetime=300
 
---require 'lua.bartek.packer'.init()
 vim.cmd("colorscheme kanagawa")
