@@ -52,6 +52,9 @@ local function packer_startup()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/nvim-cmp'
 
+  -- statusline
+  use 'echasnovski/mini.nvim'
+
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
 
   use 'zbirenbaum/copilot.lua'
