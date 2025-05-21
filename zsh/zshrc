@@ -69,3 +69,6 @@ source $HOME/bin/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
 # golang
 export PATH="$PATH:$(go env GOPATH)/bin"
+
+# java
+source "$HOME/.sdkman/bin/sdkman-init.sh"
