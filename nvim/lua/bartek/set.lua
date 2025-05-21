@@ -37,6 +37,8 @@ opt.scrolloff=8
 opt.linebreak=true
 opt.breakindent=true -- keep indentation when wrapping lines
 opt.breakindentopt='sbr,shift:20'
+opt.textwidth = 90
+opt.formatoptions = 'jcroqlnt'
 
 opt.virtualedit="all"
 opt.showmode=false
