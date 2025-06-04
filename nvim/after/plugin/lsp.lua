@@ -101,5 +101,4 @@ vim.lsp.config.gopls = {
 }
 
 vim.lsp.config.zls = { capabilities = capabilities }
-
-vim.lsp.enable({'gopls', 'zls', 'pyright'})
+vim.lsp.enable({'gopls', 'zls', 'pyright', 'ts_ls'})
