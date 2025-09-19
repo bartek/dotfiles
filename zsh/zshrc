@@ -72,3 +72,6 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 
 # java
 source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Disable globbing for URLs in curl commands
+setopt nonomatch
