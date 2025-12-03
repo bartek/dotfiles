@@ -1,0 +1,26 @@
+# Applications
+cask "karabiner-elements"
+cask "kitty"
+cask "ngrok"
+
+
+# Packages
+brew "awscli"
+brew "bat"
+brew "tmux"
+brew "docker"
+brew "fzf"
+brew "git"
+brew "go"
+brew "golangci-lint"
+brew "gopls"
+brew "htop"
+brew "hugo"
+brew "jq"
+brew "neovim"
+brew "nvm"
+brew "ripgrep"
+brew "romkatv/powerlevel10k/powerlevel10k"
+brew "the_silver_searcher"
+brew "tig"
+brew "wget"

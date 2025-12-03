@@ -1,0 +1,77 @@
+export PATH=$HOME/.bin:$PATH
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+setopt HIST_FIND_NO_DUPS
+
+# Ref: https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+################
+# Kitty/Profile
+# ##############
+
+if test -e "$HOME/kitty/shell-integration/kitty.zsh"; then source "$HOME/kitty/shell-integration/kitty.zsh"; fi
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# Fix kitty not playing nice with SSH
+export TERM=xterm-256color
+
+###################
+# Improve utilities
+# #################
+
+export EDITOR=vim
+
+source ~/.zsh/aliases
+source ~/.zsh/functions
+
+# Local configuration
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
+
+autoload -Uz compinit && compinit
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# direnv
+eval "$(direnv hook zsh)"
+export DIRENV_LOG_FORMAT= # Make direnv quiet
+
+# fuzzy finding
+export PATH="$PATH:$HOME/bin/fzf-zsh-plugin/bin"
+source $HOME/bin/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
+
+# golang
+export PATH="$PATH:$(go env GOPATH)/bin"
+
+# java
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Disable globbing for URLs in curl commands
+setopt nonomatch

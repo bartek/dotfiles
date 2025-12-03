@@ -1,0 +1,17 @@
+# Writing
+alias vim="nvim"
+
+# General
+alias whatismyip="dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com"
+alias cdr='cd $(git rev-parse --show-cdup)'
+
+
+# Go
+alias gdbuild="go build -gcflags \"-N -l\""
+alias bt="go build ./... && go test -coverprofile=.coverage.out ./..."
+alias bench="go test -bench=. -benchmem -benchtime=1000x"
+alias cv="go tool cover -html=.coverage.out"
+alias golint="golangci-lint run ./..."
+
+# eg watch kubectl get po
+alias watch="watch -n 2 "
