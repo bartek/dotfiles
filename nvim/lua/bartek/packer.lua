@@ -46,6 +46,13 @@ local function packer_startup()
   -- git
   use 'tpope/vim-fugitive'
 
+  use {
+    "~/workspace/goimplementations",
+    config = function() 
+      require("goimplementations").setup()
+    end
+  }
+
   -- autocomplete and lsp support
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
