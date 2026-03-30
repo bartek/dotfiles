@@ -8,6 +8,7 @@ local buffer_setup = function(client)
       end
     end
 
+    set_mapping('gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
     set_mapping('gq', '<cmd>lua vim.lsp.buf.format()<cr>')
     -- Hover
     set_mapping('K', '<cmd>lua vim.lsp.buf.hover()<cr>')
