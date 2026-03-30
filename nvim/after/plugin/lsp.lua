@@ -45,8 +45,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       for _, r in pairs(res.result or {}) do
         if r.edit then
           vim.lsp.util.apply_workspace_edit(r.edit, "utf-16")
-        else
-          vim.lsp.buf.execute_command(r.command)
+        --else
+        --  vim.lsp.buf.execute_command(r.command)
         end
       end
     end
@@ -54,19 +54,12 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = true,
-        -- Enable diagnostics in line
-        virtual_text = true,
-
-        -- Show diagnostic signs instead
-        signs = true,
-
-        -- Don't run diagnostics when in insert mode
-        update_in_insert = false,
-    }
-)
+vim.diagnostic.config({
+    underline = true,
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+})
 
 
 -- Configuration for gopls:
@@ -101,4 +94,4 @@ vim.lsp.config.gopls = {
 }
 
 vim.lsp.config.zls = { capabilities = capabilities }
-vim.lsp.enable({'gopls', 'zls', 'pyright', 'ts_ls'})
+vim.lsp.enable({'gopls', 'zls', 'pyright'})

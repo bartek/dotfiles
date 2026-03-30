@@ -41,7 +41,8 @@ local function packer_startup()
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
 
-  use 'nvim-treesitter/nvim-treesitter-refactor'
+  use 'nvim-treesitter/nvim-treesitter-locals'
+  use 'nvim-treesitter/nvim-treesitter-context'
 
   -- git
   use 'tpope/vim-fugitive'
@@ -71,13 +72,9 @@ local function packer_startup()
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommended if need floating window support
 
-  use 'sebdah/vim-delve' -- go debug
-
   use 'bartek/epochconverter.nvim' -- my own little thing!
 
   use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-
-  use {'prettier/vim-prettier', run = 'yarn install'} -- javascript prettier
 end
 
 local function init()
