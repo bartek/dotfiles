@@ -52,7 +52,12 @@ if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
 
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qNmh-24) ]]; then
+  compinit -C
+else
+  compinit
+fi
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -75,3 +80,5 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Disable globbing for URLs in curl commands
 setopt nonomatch
+
+export PATH="$PATH:/Users/bartek/.local/bin"

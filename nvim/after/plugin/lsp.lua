@@ -95,5 +95,5 @@ vim.lsp.config.gopls = {
     on_attach = buffer_setup,
 }
 
-vim.lsp.config.zls = { capabilities = capabilities }
+vim.lsp.config.zls = { capabilities = capabilities, on_attach = buffer_setup }
 vim.lsp.enable({'gopls', 'zls', 'pyright'})
